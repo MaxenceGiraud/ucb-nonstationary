@@ -6,9 +6,13 @@
 
 \usepackage{graphicx}
 \usepackage{amsthm}
+\usepackage{amsmath}
 \usepackage{algorithm}
 \usepackage{hyperref}
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode}
 
+\DeclareMathOperator*{\argmax}{arg\,max}
 
 \title{On Upper-Confidence Bound Policies for Non-Stationary Bandit Problems}
 \author{Maxence Giraud, Mathis Demay}
@@ -25,11 +29,35 @@
 
 \subsection{Multi armed bandits and UCB1 algorithm}
 
+\begin{algorithm}
+    \caption{UCB1}
+    For t from 1 to $K$, play arm $I_t = t$ \\
+    For t from $K$+1 to $T$, play arm 
+    $$ I_t = \argmax_{1\leq i \leq K} \bar X_t(i) + c_t(i)$$
+
+\end{algorithm}
+
 \subsection{Non Stationary Bandits}
 
 \section{Discounted UCB}
 
+\begin{algorithm}
+    \caption{Discounted UCB}
+    For t from 1 to $K$, play arm $I_t = t$ \\
+    For t from $K$+1 to $T$, play arm 
+    $$ I_t = \argmax_{1\leq i \leq K} \bar X_t(\gamma,i) + c_t(\gamma,i)$$
+
+\end{algorithm}
+
 \section{Sliding Window UCB}
+
+\begin{algorithm}
+    \caption{Sliding Window UCB}
+    For t from 1 to $K$, play arm $I_t = t$ \\
+    For t from $K$+1 to $T$, play arm 
+    $$ I_t = \argmax_{1\leq i \leq K} \bar X_t(\tau,i) + c_t(\tau,i)$$
+
+\end{algorithm}
 
 \section{Critique}
 
