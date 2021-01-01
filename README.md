@@ -21,6 +21,12 @@ nonstat_bandit = MAB_NS(n_arms = 5,arms_list = gaussian_arm_list,p=0.05)
 # (Algos are upcoming features)
 ```
 
+To compile the report, you will need latex installed and an appropriate compiler, then you can simply :
+```bash
+cd report/
+pdflatex main.tex
+```
+
 ## TODO
 - [x] Implement non stationary Bandit
 - [x] Discounted UCB
