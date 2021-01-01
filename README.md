@@ -23,7 +23,7 @@ nonstat_bandit = MAB_NS(n_arms = 5,arms_list = gaussian_arm_list,p=0.05)
 
 ## TODO
 - [x] Implement non stationary Bandit
-- [ ] Discounted UCB
+- [x] Discounted UCB
 - [ ] Sliding-Window UCB
 
 ## References
