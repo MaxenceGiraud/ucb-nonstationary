@@ -16,7 +16,7 @@ class DiscountedUCB(UCB):
     B : float,
         upper bound  on all means
     Xi : float,
-        Some appropritate constante that scale he discounted padding function
+        Some appropritate constante that scale the discounted padding function
     '''
     def __init__(self,nbArms,alpha=2,gamma=0.99,B=1,xi=1):
         assert gamma <=1 and gamma >= 0, "Gamma must be in the [0,1] interval"

@@ -29,35 +29,16 @@
 
 \subsection{Multi armed bandits and UCB1 algorithm}
 
-\begin{algorithm}
-    \caption{UCB1}
-    For t from 1 to $K$, play arm $I_t = t$ \\
-    For t from $K$+1 to $T$, play arm 
-    $$ I_t = \argmax_{1\leq i \leq K} \bar X_t(i) + c_t(i)$$
-
-\end{algorithm}
+\input{intro-mabucb.tex}
 
 \subsection{Non Stationary Bandits}
 
 \section{Discounted UCB}
-
-\begin{algorithm}
-    \caption{Discounted UCB}
-    For t from 1 to $K$, play arm $I_t = t$ \\
-    For t from $K$+1 to $T$, play arm 
-    $$ I_t = \argmax_{1\leq i \leq K} \bar X_t(\gamma,i) + c_t(\gamma,i)$$
-
-\end{algorithm}
+\input{2-discounted.tex}
 
 \section{Sliding Window UCB}
 
-\begin{algorithm}
-    \caption{Sliding Window UCB}
-    For t from 1 to $K$, play arm $I_t = t$ \\
-    For t from $K$+1 to $T$, play arm 
-    $$ I_t = \argmax_{1\leq i \leq K} \bar X_t(\tau,i) + c_t(\tau,i)$$
-
-\end{algorithm}
+\input{3-sliding.tex}
 
 \section{Critique}
 
