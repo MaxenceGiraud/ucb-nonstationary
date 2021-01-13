@@ -1,7 +1,9 @@
 \begin{algorithm}
     \caption{Sliding Window UCB}
+    \label{alg:sw_ucb}
     For t from 1 to $K$, play arm $I_t = t$ \\
     For t from $K$+1 to $T$, play arm 
     $$ I_t = \argmax_{1\leq i \leq K} \bar X_t(\tau,i) + c_t(\tau,i)$$
-
 \end{algorithm}
+
+[Note] We changed some things in the implementation, be careful of not recklessly copy the document !...

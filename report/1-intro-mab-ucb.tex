@@ -1,10 +1,28 @@
-The setting is the following. TODO
+The problem of stationary Multi-Armed Bandit (MAB) models a learning situation where the learner, called the \textit{bandit} goes through successive steps, and at each step, can choose between the advice of different advisors, called the \textit{arms}. Then it receives a reward, depending on how far the arm it chose was of good advice. This problem is said to be \textit{stationary} because the rewards of the arms follow a distribution constant over time.
 
-A well-known, efficient algorithm to solve this problem is known as \textit{UCB-1}, and is described in Algorithm \ref{UCB1.}
+The crux of this situation is to trade-off between exploiting the arms known to be good, and exploring the others, in case they would be of good advice too.\\
+
+[TODO] Define how many notions ? Regret and so on []
+
+Formally, we consider a bandit with $K$ arms, referred to as $[\![1,K]\!]$. At each time $t$, the learner has to choose an arm $I_t \in [\![1,K]\!]$. This is done following a given policy $\pi$, which can be deterministic or random. Then, it receives a reward $X_t(I_t)$. In the stationary case, we suppose that for each $i \in [\![1,K]\!]$, the sequence $\{X_t(i)\}_{t \geq 1}$ of rewards of arm $i$ is made up of independent and identically distributed (i.i.d.) variables. This means the distribution of rewards of arm $i$ is constant over time. Thus we can define $\mu(i)$ to be the expected reward at each time step, without a dependence on $t$.
+
+The general aim is to find a policy which gets the largest expected reward. The optimal one is denoted by $\pi^*$, with reward $\mu^*=\underset{1\leq i \leq K}{\max} \mu(i)$. It is obtained by constantly playing arm $i^* = \underset{1\leq i \leq K}{\argmax}\ \mu(i)$.
+
+In order to assess the performance of a policy we define the regret of a policy, which measures how far it strays from the optimal one: $R(T,\pi)=\mathcal{E}\left[\sum_{t=1}^T \mu^* - \mu(I_t) \right]$.
+
+Finally, we define $N_t(i)=\sum_{s=1}^t \mathbbm{1}(I_s=i)$ to be the number of times arm $i$ has been played until time $t$.\\
+
+A well-known, efficient class of policies is that of the UCB	algorithms, which consist in playing, at each step $t$, deterministically, the arm $i$ which maximizes the upper bound $B(t,i)$ of a confidence interval for its expected reward $\mu(i)$.
+Among these, a particularly famous one is known as \textit{UCB-1}, and is described in Algorithm \ref{alg:ucb1}.
 
 \begin{algorithm}
     \caption{UCB1}
+	\label{alg:ucb1}
     For t from 1 to $K$, play arm $I_t = t$ \\
     For t from $K$+1 to $T$, play arm 
     $$ I_t = \argmax_{1\leq i \leq K} \bar X_t(i) + c_t(i)$$
 \end{algorithm}
+
+
+In UCB-1, one sets $B(t,i)=\bar{X}_t(i)+c_t(i)$, where $\bar{X}_t(i)=\frac{1}{N_t(i)}\sum_{s=1}^t X_s(i)\mathbbm{1}(I_s=i)$ takes the past into account, constituting an exploitation term, and $c_t(i)$ is a \textit{padding function}, meant to be an exploration term. Note that the two algorithms studied in the following can be formulated the same way, the only change dwelling in this padding function. Here the authors propose $c_t(i)=B\sqrt{\xi \log(t)/N_t(i)}$, with $B$ an upper bound of the rewards, and $\xi>0$ a hyperparameter.
+

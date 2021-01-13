@@ -1,5 +1,6 @@
 \begin{algorithm}
     \caption{Discounted UCB}
+    \label{alg:d_ucb}
     For t from 1 to $K$, play arm $I_t = t$ \\
     For t from $K$+1 to $T$, play arm 
     $$ I_t = \argmax_{1\leq i \leq K} \bar X_t(\gamma,i) + c_t(\gamma,i)$$
