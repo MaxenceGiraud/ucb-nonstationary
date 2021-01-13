@@ -2,6 +2,9 @@
 # Mathis's notes
 notes_SDM_project.txt 
 
+# main pdf file for report
+report/*.pdf
+
 ### JupyterNotebooks ###
 # gitignore template for Jupyter Notebooks
 # website: http://jupyter.org/
