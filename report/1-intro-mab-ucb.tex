@@ -1,8 +1,10 @@
+The setting is the following. TODO
+
+A well-known, efficient algorithm to solve this problem is known as \textit{UCB-1}, and is described in Algorithm \ref{UCB1.}
 
 \begin{algorithm}
     \caption{UCB1}
     For t from 1 to $K$, play arm $I_t = t$ \\
     For t from $K$+1 to $T$, play arm 
     $$ I_t = \argmax_{1\leq i \leq K} \bar X_t(i) + c_t(i)$$
-
 \end{algorithm}
