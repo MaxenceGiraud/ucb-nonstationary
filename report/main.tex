@@ -1,20 +1,31 @@
 \documentclass{article}
-\usepackage[utf8]{inputenc}
 
+% For ??
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+
+% For bibliography
 \usepackage[square,numbers]{natbib}
 \bibliographystyle{abbrvnat}
 
+% For pictures
 \usepackage{graphicx}
+
+% To typeset math
 \usepackage{amsthm}
 \usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{bbm} % For indicator function
+
+% Well, it's in the name
 \usepackage{algorithm}
-\usepackage{hyperref}
 \usepackage[noend]{algpseudocode}
 
-\usepackage{bbm}
+
 
 \DeclareMathOperator*{\argmax}{arg\,max}
 
+% ====================================
 \title{On Upper-Confidence Bound Policies for Non-Stationary Bandit Problems}
 \author{Maxence Giraud, Mathis Demay}
 \date{2020}

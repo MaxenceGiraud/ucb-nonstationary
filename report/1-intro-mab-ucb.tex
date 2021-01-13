@@ -1,6 +1,6 @@
-The problem of stationary Multi-Armed Bandit (MAB) models a learning situation where the learner, called the \textit{bandit} goes through successive steps, and at each step, can choose between the advice of different advisors, called the \textit{arms}. Then it receives a reward, depending on how far the arm it chose was of good advice. This problem is said to be \textit{stationary} because the rewards of the arms follow a distribution constant over time.
+The problem of stationary Multi-Armed Bandit (MAB) models a learning situation where the learner, called the \textit{bandit}, goes through successive steps, and at each step, can choose between the advice of different advisors, called the \textit{arms}. Then it receives a reward, depending on how far the arm it chose was of good advice. Then the time step is finished. This problem is said to be \textit{stationary} because the rewards of the arms follow a distribution constant over time.
 
-The crux of this situation is to trade-off between exploiting the arms known to be good, and exploring the others, in case they would be of good advice too.\\
+The crux of this situation is to find a trade-off between exploiting the arms already known to be good, and exploring the others, in case they would be of good advice too.\\
 
 [TODO] Define how many notions ? Regret and so on []
 
@@ -8,7 +8,7 @@ Formally, we consider a bandit with $K$ arms, referred to as $[\![1,K]\!]$. At e
 
 The general aim is to find a policy which gets the largest expected reward. The optimal one is denoted by $\pi^*$, with reward $\mu^*=\underset{1\leq i \leq K}{\max} \mu(i)$. It is obtained by constantly playing arm $i^* = \underset{1\leq i \leq K}{\argmax}\ \mu(i)$.
 
-In order to assess the performance of a policy we define the regret of a policy, which measures how far it strays from the optimal one: $R(T,\pi)=\mathcal{E}\left[\sum_{t=1}^T \mu^* - \mu(I_t) \right]$.
+In order to assess the performance of a policy we define the regret of a policy, which measures how far it strays from the optimal one: $R(T,\pi)=\mathbb{E}\left[\sum_{t=1}^T \mu^* - \mu(I_t) \right]$.
 
 Finally, we define $N_t(i)=\sum_{s=1}^t \mathbbm{1}(I_s=i)$ to be the number of times arm $i$ has been played until time $t$.\\
 
@@ -29,5 +29,6 @@ In UCB-1, one sets
 \beta(t,i)& =\bar{X}_t(i)+c_t(i)\\
 \text{with } \bar{X}_t(i) &= \frac{1}{N_t(i)}\sum_{s=1}^t X_s(i)\mathbbm{1}(I_s=i)
 \end{align}
-where $\bar{X}_t$ takes the past into account, constituting an exploitation term, and $c_t(i)$ is a \textit{padding function}, meant to be an exploration term. Note that the two algorithms studied in the following can be formulated the same way, the only change dwelling in this padding function. Here the authors propose $c_t(i)=B\sqrt{\xi \log(t)/N_t(i)}$, with $B$ an upper bound of the rewards, and $\xi>0$ a hyperparameter.
-
+where $\bar{X}_t$ takes the past into account, constituting more of an exploitation term, and $c_t(i)$ is a \textit{padding function}, meant to be more of an exploration term. Here the authors propose $c_t(i)=B\sqrt{\xi \log(t)/N_t(i)}$, with $B$ an upper bound of the rewards, and $\xi>0$ a hyperparameter.
+Note that the divisions by $N_t(i)$ contribute to exploration: it an arm is chosen too often, it will not be chosen at some point due to this factor, even if it yields good rewards.
+Note that the two algorithms studied in the following are formulated in a similar way, with this idea of $\beta(t,i)& =\bar{X}_t(i)+c_t(i)$.
