@@ -6,4 +6,14 @@
     $$ I_t = \argmax_{1\leq i \leq K} \bar X_t(\tau,i) + c_t(\tau,i)$$
 \end{algorithm}
 
-[Note] We changed some things in the implementation, be careful of not recklessly copy the document !...
+Again, $\beta(t,i)=\bar{X}_t(i)+c_t(i)$.
+However, about the definition of $\bar{X}$ given in the paper, we reckon there is a problem in the definitions. In the definition of $X$ there is an $N_t(\gamma, i)$ but no $\gamma$ in the sum, however $\gamma$ appears in the sum of $N_t$. Then the definition of $\bar{X_t}$ is not homogeneous in terms of $\gamma$. Also, in the definition of $c_t$, $N_t$ appears with a parameter $\tau$, not $\gamma$. Also, the sum in $N_t$ begins at $t=1$, not considering the same amount of terms as $X_t$. We concluded the definitions of $\bar{X_t}$ and $c_t$ are right but $N_t$ is a wrong copy-paste. Then we propose the following definitions:
+\begin{align}
+\bar{X}(\tau, i) &= \frac{1}{N_t(\tau, i)}\sum_{s=t-\tau+1}^t X_s(i)\mathbbm{1}(I_s=i) \\
+N_t(\gamma, i) &= \sum_{s=t-\tau+1}^t \mathbbm{1}(I_s=i) \\
+c_t(\tau, i) &= B\sqrt{\frac{\xi \log(min(t, \tau))}{N_t(\tau,i)}}
+\end{align}
+
+These definitions drop $\gamma$, taking into account the fact that they say their variant is 'more abrupt [than \textit{D-UCB}]', and that $\gamma$ only appears in $N_t$. However, it could be interesting to see if the combination of the discount factor and the sliding window is interesting, but they unfortunately don't tackle this question.
+
+[TODO] More properties ?[]

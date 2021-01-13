@@ -12,7 +12,7 @@ In order to assess the performance of a policy we define the regret of a policy,
 
 Finally, we define $N_t(i)=\sum_{s=1}^t \mathbbm{1}(I_s=i)$ to be the number of times arm $i$ has been played until time $t$.\\
 
-A well-known, efficient class of policies is that of the UCB	algorithms, which consist in playing, at each step $t$, deterministically, the arm $i$ which maximizes the upper bound $B(t,i)$ of a confidence interval for its expected reward $\mu(i)$.
+A well-known, efficient class of policies is that of the UCB	algorithms, which consist in playing, at each step $t$, deterministically, the arm $i$ which maximizes the upper bound $\beta(t,i)$ of a confidence interval for its expected reward $\mu(i)$.
 Among these, a particularly famous one is known as \textit{UCB-1}, and is described in Algorithm \ref{alg:ucb1}.
 
 \begin{algorithm}
@@ -24,5 +24,10 @@ Among these, a particularly famous one is known as \textit{UCB-1}, and is descri
 \end{algorithm}
 
 
-In UCB-1, one sets $B(t,i)=\bar{X}_t(i)+c_t(i)$, where $\bar{X}_t(i)=\frac{1}{N_t(i)}\sum_{s=1}^t X_s(i)\mathbbm{1}(I_s=i)$ takes the past into account, constituting an exploitation term, and $c_t(i)$ is a \textit{padding function}, meant to be an exploration term. Note that the two algorithms studied in the following can be formulated the same way, the only change dwelling in this padding function. Here the authors propose $c_t(i)=B\sqrt{\xi \log(t)/N_t(i)}$, with $B$ an upper bound of the rewards, and $\xi>0$ a hyperparameter.
+In UCB-1, one sets 
+\begin{align}
+\beta(t,i)& =\bar{X}_t(i)+c_t(i)\\
+\text{with } \bar{X}_t(i) &= \frac{1}{N_t(i)}\sum_{s=1}^t X_s(i)\mathbbm{1}(I_s=i)
+\end{align}
+where $\bar{X}_t$ takes the past into account, constituting an exploitation term, and $c_t(i)$ is a \textit{padding function}, meant to be an exploration term. Note that the two algorithms studied in the following can be formulated the same way, the only change dwelling in this padding function. Here the authors propose $c_t(i)=B\sqrt{\xi \log(t)/N_t(i)}$, with $B$ an upper bound of the rewards, and $\xi>0$ a hyperparameter.
 
