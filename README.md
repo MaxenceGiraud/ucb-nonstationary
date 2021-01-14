@@ -1,7 +1,9 @@
 # On Upper-Confidence Bound Policies for Non-Stationary Bandit Problems
 
 
-Implementation of the paper by Aurélien Garivier and Eric Moulines, On Upper-Confidence Bound Policies for Non-Stationary Bandit Problems [1].
+Implementation of the paper by Aurélien Garivier and Eric Moulines, On Upper-Confidence Bound Policies for Non-Stationary Bandit Problems [1]. We also try some variants of the algorithms and compare them together.
+
+Our experiments with the different algorithms are compiled in the notebook [experiements.ipynb](./experiments.ipynb)/
 
 ## Installation
 To install simply clone the project : 
@@ -30,7 +32,7 @@ pdflatex main.tex
 ## TODO
 - [x] Implement non stationary Bandit
 - [x] Discounted UCB
-- [ ] Sliding-Window UCB
+- [x] Sliding-Window UCB
 
 ## References
 [1] Garivier, Aurélien & Moulines, Eric. (2008). On Upper-Confidence Bound Policies for Non-Stationary Bandit Problems. 
