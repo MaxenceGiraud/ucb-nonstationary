@@ -9,6 +9,8 @@ def OneBanditOneLearnerOneRun(bandit, strategy, timeHorizon):
     selections = []
     rewards = []
     strategy.clear() # reset previous history
+    if hasattr(bandit,"clear"):
+        bandit.clear()
     for t in range(timeHorizon):
         # choose the next arm to play with the bandit algorithm
         arm = strategy.chooseArmToPlay()
