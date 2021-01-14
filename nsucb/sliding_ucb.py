@@ -53,21 +53,17 @@ class SlidingUCB(UCB):
         else:
             N = np.sum(self.history_bool[-self.tau:], axis=0)
             
-            print(N)
-            # N sometimes contains zeros ;/
-            if 0 in N:
-                print("N == 0")
             X = (1/N) * np.sum(self.rewards[-self.tau:], axis=0)
             c = self.B * np.sqrt((self.xi * np.log(max(self.t,
                                                        self.tau)))/N)
             
             # N can contain 0s, which leads to nan in X.
-            # Then the value of X+c should be 0, because the sum
+            # Then the value of X+c should be +inf, because the sum
             # in X vanishes. Doing so also makes the corresponding arm
-            # be less likely to be chosen, because for all i,
+            # to be chosen automatically, because for all i,
             # X_t(gamma, i) >= 0 and N_t(gamma, i) >= 0.
             # This is what this line does:
-            bound = np.nan_to_num(X+c, copy=False, nan=0)
+            bound = np.nan_to_num(X+c, copy=False, nan=np.inf)
             return randmax(bound)
             
             
@@ -98,7 +94,23 @@ class SlidingUCB(UCB):
                                      reward_this_step))
         super().receiveReward(arm,reward)
         
-        
+
+class SlidingUCB_uniform_discount(SlidingUCB):
+    '''Variant Of Sliding UCB with discount factor added in the N '''
+
+    def chooseArmToPlay(self):
+        if self.t < self.nbArms:
+            return self.t
+        else:
+            N = np.sum(self.history_bool[-self.tau:], axis=0) +  np.sum(self.history_bool[:-self.tau], axis=0) / self.tau
+
+            X = (1/N) * np.sum(self.rewards[-self.tau:], axis=0)
+            c = self.B * np.sqrt((self.xi * np.log(max(self.t,
+                                                       self.tau)))/N)
+
+            return randmax(X+c)
+
+
 if __name__ == "__main__":
     my_SWUCB = SlidingUCB(4, 6, 2, 3)
     print(my_SWUCB)
