@@ -1,4 +1,4 @@
 from .bandit_tools import *
-from .bandits import MAB
+from .bandits import *
 from .experiments import *
 from .arms import *
