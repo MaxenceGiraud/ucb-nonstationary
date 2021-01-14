@@ -2,6 +2,6 @@ The work discussed in this paper is focused on Non-Stationary bandit, as of now 
 
 This problem can be expressed in the following way. The rewards $X_s(i)$ of an arm $i$ is modeled by an independant sequence of random variables from a distribution that may change across time.\\
 
-Garivier et al. focused their work on abruptly changing environment, meaning that the distributions of rewards remain constant during periods and change at unknown time instants called \textbf{breakpoints}. Other non Stationary bandits problem exist where the distributions of the rewards are changed continuously but are not the topic of this paper.\\
+Garivier et al. focused their work on abruptly changing environment, meaning that the distributions of rewards remain constant during periods and change at unknown time instants called \textbf{breakpoints}. Other non Stationary bandits problem exist where the distributions of the rewards are changed continuously but are not the main topic of this paper. They nevertheless still try to see how the different policies perform in both type of non stationary environments.\\
 
 It is straighforward that standard policies such as UCB reviewed in the last subsection are not appropriate for this kind of environment, this is why the authors introduce two new algorithms : Discounted UCB and Sliding Window UCB which we are going to discuss in the rest of this report.
