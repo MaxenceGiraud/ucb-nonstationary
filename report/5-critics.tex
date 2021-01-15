@@ -1,5 +1,13 @@
-- The obviously not rereading of the definition of \textit{SW-UCD} is definitely a pity.
+We have several remarks regarding the paper.
 
-- In general, the paper is not very clear. We soon get lost into computational details, without the authors helping us get the big picture out of it. For example, if they had described the idea behind SW-UCB more, we may have understood their point. Maybe in the end they use the same definition of $N_t$ as in D-UCB, leading to no error of division by zero, but maybe not. We don't know.
+The obvious lack of rereading of the definition of \textit{SW-UCD} is definitely a pity, because it is at the root of their main contribution and the subsequent analysis and other paragraphs which follow.
 
-- Experiments: for D-UCB and SW-UCB they took the hyperparameters tuned to the very problem they are working on, and for UCB1 they took theoretical values from another paper.
+In general, the paper is not very clear. We soon get lost into computational details, without the authors helping us get the big picture out of it. At least, this is what we think, comparing with other papers. For example, if they had described the idea behind SW-UCB more, we might have understood their point.  This difficulty to follow is enhanced by the length of their demonstrations. However they tried to make them easier to follow by breaking them down into different steps.
+
+Still, the analyses of the algorithms are exhaustive.
+
+They could have compared the performances of UCB1 and the others on the stationary environment.
+
+Concerning the experiments, for D-UCB and SW-UCB they took the hyperparameters tuned to the very problem they are working on, and for UCB1 they took theoretical values from another paper. This is criticizable. 
+
+Still, for reproducibility they gave parameters so it is reproducible, more than in many other papers. We couldn't reproduce their results, but this is more likely due to other reasons (such as errors in the code, maybe).

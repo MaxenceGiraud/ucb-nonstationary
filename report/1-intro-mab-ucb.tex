@@ -28,4 +28,4 @@ In UCB-1, one sets
 where $\bar{X}_t$ takes the past into account, constituting more of an exploitation term, and $c_t(i)$ is a \textit{padding function}, meant to be more of an exploration term.\\
 Here the authors propose $c_t(i)=B\sqrt{\xi \log(t)/N_t(i)}$, with $B$ an upper bound of the rewards, and $\xi>0$ a hyperparameter.
 Note that the divisions by $N_t(i)$ contribute to exploration: it an arm is chosen too often, it will not be chosen at some point due to this factor, even if it yields good rewards.
-Note that the two algorithms studied in the following are formulated in a similar way, with this idea of $\beta(t,i)\& =\bar{X}_t(i)+c_t(i)$.
+Note that the two algorithms studied in the following are formulated in a similar way, with this idea of $\beta(t,i)\ =\bar{X}_t(i)+c_t(i)$.

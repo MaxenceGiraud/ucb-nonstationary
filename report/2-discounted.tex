@@ -11,8 +11,8 @@ The first algorithm studied here was initially proposed by Kocsis and Szepesvár
 Where
 \begin{align}
 \bar{X}(\tau, i) &= \frac{1}{N_t(\tau, i)}
-\sum_{s=t-\tau+1}^t \gamma^{t-s}X_s(i)\mathbbm{1}(I_s=i)\\
-N_t(\gamma, i) &= \sum_{s=t-\tau+1}^t \gamma^{t-s}\mathbbm{1}(I_s=i)\\
+\sum_{s=1}^t \gamma^{t-s}X_s(i)\mathbbm{1}(I_s=i)\\
+N_t(\gamma, i) &= \sum_{s=1}^t \gamma^{t-s}\mathbbm{1}(I_s=i)\\
 c_t(\tau, i) &= 2B\sqrt{\frac{\xi \log(n_t(\gamma))}{N_t(\gamma,i)}}\\
 n_t(\gamma) &= \sum_{i=1}^K N_t(\gamma,i)
 \end{align}
