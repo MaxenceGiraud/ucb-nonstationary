@@ -23,11 +23,22 @@ def OneBanditOneLearnerOneRun(bandit, strategy, timeHorizon):
         rewards.append(reward)
     return selections, rewards
 
-def CumulativeRegret(bandit,selections):
+def CumulativeRegret(bandit,selections,timeHorizon=None):
     """Compute the pseudo-regret associated to a sequence of arm selections"""
-    return np.cumsum(max(bandit.means)*np.ones(len(selections)) - np.array(bandit.means)[selections])
+    if timeHorizon is None :
+        regret = np.cumsum(max(bandit.means)*np.ones(len(selections)) - np.array(bandit.means)[selections])
+    else :
+        regret= []
+        bandit.clear()
+        for t in range(timeHorizon):
+            bandit.t = t
+            regret.append(max(bandit.means) - bandit.means[selections[t]])
+        regret = np.cumsum(regret)
+        bandit.clear()
 
-def OneBanditOneLearnerMultipleRuns(bandit, strategy, timeHorizon, N_exp, tsave=[]):
+    return regret
+
+def OneBanditOneLearnerMultipleRuns(bandit, strategy, timeHorizon, N_exp, tsave=[],non_stationary=False):
     """
     Perform N_exp runs of a bandit strategy (strategy) on a MAB instance (bandit) for (timeHorizon) time steps 
     and compute the pseudo-regret of each run 
@@ -36,6 +47,10 @@ def OneBanditOneLearnerMultipleRuns(bandit, strategy, timeHorizon, N_exp, tsave=
     """
     if (len(tsave) == 0):
         tsave = np.arange(timeHorizon)
+    if non_stationary :
+        T = timeHorizon
+    else : 
+        T = None
     savedTimes = len(tsave)
     Regret = np.zeros((N_exp, savedTimes)) # Store the regret values on different runs
     for n in range(N_exp):
@@ -43,12 +58,13 @@ def OneBanditOneLearnerMultipleRuns(bandit, strategy, timeHorizon, N_exp, tsave=
         # run the bandit strategy
         selections, rewards = OneBanditOneLearnerOneRun(bandit, strategy, timeHorizon)
         # compute its pseudo-regret
-        regret_one_run = CumulativeRegret(bandit, selections)
+         
+        regret_one_run = CumulativeRegret(bandit, selections,T)
         # store (a sub-sampling of) the cumulative regret
         Regret[n, :] = np.array(regret_one_run)[tsave] 
     return Regret
 
-def RunExpes(algorithms,bandit,N_exp,timeHorizon,step=10,quantiles = "on",names=[]):
+def RunExpes(algorithms,bandit,N_exp,timeHorizon,step=10,quantiles = "on",names=[],non_stationary=False):
     """run experiments with multiple algorithms"""
     plt.clf()
     tsave = np.arange(1,timeHorizon,step)
@@ -57,7 +73,7 @@ def RunExpes(algorithms,bandit,N_exp,timeHorizon,step=10,quantiles = "on",names=
         names = [str(algo) for algo in algorithms]
     for i in range(len(algorithms)):
         algo=algorithms[i]
-        Regret = OneBanditOneLearnerMultipleRuns(bandit, algo, timeHorizon, N_exp, tsave)
+        Regret = OneBanditOneLearnerMultipleRuns(bandit, algo, timeHorizon, N_exp, tsave,non_stationary=non_stationary)
         plt.plot(tsave, np.mean(Regret, 0), linewidth=2.0, color=colors[i], label="mean regret of "+ names[i])
         if (quantiles == "on"):
             plt.plot(tsave, np.quantile(Regret, 0.95, 0), tsave, np.quantile(Regret,0.05,0), linestyle="dashed", color=colors[i])
