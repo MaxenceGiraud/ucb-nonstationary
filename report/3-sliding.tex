@@ -16,4 +16,8 @@ c_t(\tau, i) &= B\sqrt{\frac{\xi \log(min(t, \tau))}{N_t(\tau,i)}}
 
 These definitions drop $\gamma$, taking into account the fact that they say their variant is 'more abrupt [than \textit{D-UCB}]'. However, it could be interesting to see if the combination of the discount factor and the sliding window is interesting, but they unfortunately don't tackle this question.
 
+We eventually found in \cite{slidesGarivier} that our definition of $N_t$ was good.
+
+Also, they don't deal with the case of an arm which has not been selected in the $\tau$ last steps. In the current formulation, this leads to $N_t(\gamma, i)=0$ and to a division by $0$ in the definition of $\bar{X}(\tau, i)$.
+
 [TODO] More properties ?[]
