@@ -1,5 +1,3 @@
-\subsection{Discounted UCB policy}
-
 The first algorithm studied here was initially proposed by Kocsis and Szepesvári in 2006 \cite{Kocsis06banditbased} and is called Discounted UCB. In order to estimate the instantaneous expected reward, the policy averages the past reward with a discoud $\gamma$ which decrease exponentionally with time (the older a reward is, the less significant it is).  The policy algorithm is described in \ref{alg:d_ucb}. We can notice without much effort that if the discout factor $\gamma$ is set to 1, the discounted UCB boils down the original UCB algorithm.\\
 
 \begin{algorithm}[ht]
@@ -20,8 +18,6 @@ n_t(\gamma) &= \sum_{i=1}^K N_t(\gamma,i)
 \end{align}
 
 We call in this context $c$ the dicounted padding function and $\bar X$ represent the discounted empirical average.\\
-As this algorithm seems to be more fitted in continuous changing environment (because of the $\gamma$), they authors propose another method that would be though to work in more abruptly changing environments.
+As this algorithm seems to be more fitted in continuous changing environment (because of the $\gamma$), they authors propose another method that would be though to work in more abruptly changing environments.\\
 
-\subsection{Analysis of Discounted UCB}
-
-The authors propose an in depth analysis of the discounted UCB policy, in this section we are going to review the what we think are the most important. The complete list of Theorems and proofs can be found in the original paper by Garivier and Moulines \cite{garivier2008upperconfidence}.\\
+The authors propose an in depth analysis of the discounted UCB policy,  The complete list of Theorems and proofs can be found in the original paper by Garivier and Moulines \cite{garivier2008upperconfidence}. We won't focus our report on those findings which mostly consist of complex bounds on some values of the policy which are not easy to understand the underlying significance.
