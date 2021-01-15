@@ -22,6 +22,10 @@
 \usepackage{amsfonts}
 \usepackage{bbm} % For indicator function
 
+% Figure
+\usepackage{caption}
+\usepackage{subcaption}
+
 % To typeset code
 \usepackage{listings}
 
@@ -65,12 +69,14 @@
 	\input{3-sliding.tex}
 
 \section{Experiments} \label{sec_expes}
-
-Our implementation can be found here : \url{https://github.com/MaxenceGiraud/ucb-nonstationary} 
 	
-	\subsection{Our experiments}
+	\subsection{Variants of Sliding Window UCB}
 	
 		\input{4-our-experiments.tex}
+
+	\subsection{Our experiments}
+
+		\input{4.2-experiments.tex}
 
 \section{Critique}
 	

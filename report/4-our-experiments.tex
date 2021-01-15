@@ -1,8 +1,8 @@
 In order to deal with the ill-defined SW-UCB, we try $3$ possibilities for this algorithm. Anyway, whether the definition is wrong or not is not a big deal anymore; we find it interesting to explore these $3$ possibilities.
 
-First we choose to work with $\tau > K$. This hypothesis may sound a little arbitrary, however it is coherent in the sense that looking at less time steps than the actual number of arms does not look like a very reliable solution. The exploitation part has to look at several past events in order to be relevant. In that sense we can also say that $\tau$ should be a multiple of $K$, say $5K$ for example. 
+First we choose to work with $\tau > K$. This hypothesis may sound a little arbitrary, however it is coherent in the sense that looking at less time steps than the actual number of arms does not look like a very reliable solution. The exploitation part has to look at several past events in order to be relevant. In that sense we can also say that $\tau$ should be a multiple of $K$, say $5K$ for example. \\
 
-\textbf{First variant.} Then, with this hypothesis $\tau > K$ we can do this variant: for $t >= K$, if an arm has not been chosen in the last $\tau$ draws, draw it at next step. Indeed, as $\tau > K$ and with this procedure, the number of arms that have not been chosen in the $\tau$ last steps is at most $1$. In practice this choice is forced by putting $\beta(t,i)\leftarrow+\infty$. In the code this variant is in the class \texttt{SlidingUCB}.
+\textbf{First variant.} Then, with this hypothesis $\tau > K$ we can do this variant: for $t >= K$, if an arm has not been chosen in the last $\tau$ draws, draw it at next step. Indeed, as $\tau > K$ and with this procedure, the number of arms that have not been chosen in the $\tau$ last steps is at most $1$. In practice this choice is forced by putting $\beta(t,i)\leftarrow+\infty$. In the code this variant is in the class \texttt{SlidingUCB}.\\
 
 \textbf{Second variant.} The second possibility is to set \\
 $N_t(\tau,i)=\sum_{s=1}^t \mathbbm{1}(I_s=i)
@@ -10,7 +10,7 @@ $N_t(\tau,i)=\sum_{s=1}^t \mathbbm{1}(I_s=i)
 		\mathbbm{1}(t-\tau+1 \leq s \leq t)
 		+ \frac{1}{\tau} \mathbbm{1}(s < t-\tau+1)
 	\right)$.
-In the code this variant is in the class \texttt{SlidingUCB\textunderscore uniform\textunderscore discount}.
+In the code this variant is in the class \texttt{SlidingUCB\textunderscore uniform\textunderscore discount}.\\
 
 \textbf{Third variant.} The third possibility is to define $N_t$ as in D-UCB:\\
 $N_t(\gamma, i) = \sum_{s=1}^t \mathbbm{1}(I_s=i)
