@@ -1,3 +1,5 @@
+After reviewing the Discounted UCB algorithm, the authors propose a new algorithm called Sliding Window UCB. This time instead of relying on some discounted values of past reward, the policy is only insterested in the last $\tau$ rewards. Conceptually this algorithm is very much suited to the non-stationary scenario as it will disregard old drawings of arms. The full algorithm is described in Algorithm \ref{alg:sw_ucb}.\\
+
 \begin{algorithm}
     \caption{Sliding Window UCB}
     \label{alg:sw_ucb}
