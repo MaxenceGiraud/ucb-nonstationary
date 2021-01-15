@@ -110,6 +110,30 @@ class SlidingUCB_uniform_discount(SlidingUCB):
 
             return randmax(X+c)
 
+class SlidingUCB_discountedN(SlidingUCB):
+    '''Variant Of Sliding UCB with discount factor added in the N '''
+    def __init__(self, nbArms, tau, B, xi,gamma=0.9):
+        assert xi > 0, "Xi must be positive."
+        self.nbArms = nbArms
+        self.tau = tau
+        self.B = B
+        self.xi = xi
+        self.gamma = gamma
+        self.clear()
+
+    def chooseArmToPlay(self):
+        if self.t < self.nbArms:
+            return self.t
+        else:
+            discount = np.ones(self.t-self.tau)*self.gamma**(self.t-self.tau-np.arange(self.t-self.tau))
+            N = np.sum(self.history_bool[-self.tau:], axis=0) +  np.sum(self.history_bool[:-self.tau], axis=0) *discount
+
+            X = (1/N) * np.sum(self.rewards[-self.tau:], axis=0)
+            c = self.B * np.sqrt((self.xi * np.log(max(self.t,
+                                                       self.tau)))/N)
+
+            return randmax(X+c)
+
 
 if __name__ == "__main__":
     my_SWUCB = SlidingUCB(4, 6, 2, 3)
