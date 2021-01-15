@@ -35,10 +35,10 @@ class DiscountedUCB(UCB):
             return self.t
         else : 
             discount = np.ones(self.t)*self.gamma**(self.t-np.arange(self.t))
-            N = np.array([np.sum(discount[np.where(i==self.history,1,0)]) for i in range(self.nbArms)])
+            N = np.array([np.sum(discount[np.where(i==np.array(self.history),True,False)]) for i in range(self.nbArms)])
             X = 1/N * np.sum(discount.reshape(-1,1) *np.reshape(self.reward_history,(-1,1))* self.history_bool,axis=0) # discounted empirical average
 
-            c = 2 * self.B * np.sqrt((self.xi * np.log(max(1,N.sum()))/N))# discounted padding function   
+            c = 2 * self.B * np.sqrt((self.xi * np.log(N.sum())/N))# discounted padding function   
 
             return randmax(X+c)
         
