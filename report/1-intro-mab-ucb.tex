@@ -1,10 +1,7 @@
-The problem of stationary Multi-Armed Bandit (MAB) models a learning situation where the learner, called the \textit{bandit}, goes through successive steps, and at each step, can choose between the advice of different advisors, called the \textit{arms}. Then it receives a reward, depending on how far the arm it chose was of good advice. Then the time step is finished. This problem is said to be \textit{stationary} because the rewards of the arms follow a distribution constant over time.
-
+The problem of stationary Multi-Armed Bandits (MAB) describes a learning situation where the learner, called the \textit{bandit}, goes through successive steps, and at each step, can choose between the advice of different advisors, called the \textit{arms}. Then it receives a reward, depending on how far the arm it chose was of good advice. Then the time step is finished. This problem is said to be \textit{stationary} because the rewards of the arms follow a distribution constant over time.\\
 The crux of this situation is to find a trade-off between exploiting the arms already known to be good, and exploring the others, in case they would be of good advice too.\\
 
-[TODO] Define how many notions ? Regret and so on []
-
-Formally, we consider a bandit with $K$ arms, referred to as $[\![1,K]\!]$. At each time $t$, the learner has to choose an arm $I_t \in [\![1,K]\!]$. This is done following a given policy $\pi$, which can be deterministic or random. Then, it receives a reward $X_t(I_t)$. In the stationary case, we suppose that for each $i \in [\![1,K]\!]$, the sequence $\{X_t(i)\}_{t \geq 1}$ of rewards of arm $i$ is made up of independent and identically distributed (i.i.d.) variables. This means the distribution of rewards of arm $i$ is constant over time. Thus we can define $\mu(i)$ to be the expected reward at each time step, without a dependence on $t$.
+Formally, we consider a bandit with $K$ arms, referred to as $[\![1,K]\!]$. At each time $t$, the learner has to choose an arm $I_t \in [\![1,K]\!]$. This is done following a given policy $\pi$, which can be deterministic or random. Then, it receives a reward $X_t(I_t)$. In the stationary case, we suppose that for each $i \in [\![1,K]\!]$, the sequence $\{X_t(i)\}_{t \geq 1}$ of rewards of arm $i$ is made up of independent and identically distributed (i.i.d.) variables. This means the distribution of rewards of arm $i$ is constant over time. Thus we can define $\mu(i)$ to be the expected reward at each time step, without a dependence on $t$.\\
 
 The general aim is to find a policy which gets the largest expected reward. The optimal one is denoted by $\pi^*$, with reward $\mu^*=\underset{1\leq i \leq K}{\max} \mu(i)$. It is obtained by constantly playing arm $i^* = \underset{1\leq i \leq K}{\argmax}\ \mu(i)$.
 
@@ -12,8 +9,8 @@ In order to assess the performance of a policy we define the regret of a policy,
 
 Finally, we define $N_t(i)=\sum_{s=1}^t \mathbbm{1}(I_s=i)$ to be the number of times arm $i$ has been played until time $t$.\\
 
-A well-known, efficient class of policies is that of the UCB	algorithms, which consist in playing, at each step $t$, deterministically, the arm $i$ which maximizes the upper bound $\beta(t,i)$ of a confidence interval for its expected reward $\mu(i)$.
-Among these, a particularly famous one is known as \textit{UCB-1}, and is described in Algorithm \ref{alg:ucb1}.
+A well-known, efficient class of policies is that of the UCB	algorithms, which consist in playing, at each step $t$, deterministically, the arm $i$ which maximizes the upper bound $\beta(t,i)$ of a confidence interval for its expected reward $\mu(i)$.\\
+Among these, a particularly famous one is known as \textit{UCB-1}, and is described in algorithm \ref{alg:ucb1}.
 
 \begin{algorithm}
     \caption{UCB1}
@@ -23,12 +20,12 @@ Among these, a particularly famous one is known as \textit{UCB-1}, and is descri
     $$ I_t = \argmax_{1\leq i \leq K} \bar X_t(i) + c_t(i)$$
 \end{algorithm}
 
-
 In UCB-1, one sets 
 \begin{align}
 \beta(t,i)& =\bar{X}_t(i)+c_t(i)\\
 \text{with } \bar{X}_t(i) &= \frac{1}{N_t(i)}\sum_{s=1}^t X_s(i)\mathbbm{1}(I_s=i)
 \end{align}
-where $\bar{X}_t$ takes the past into account, constituting more of an exploitation term, and $c_t(i)$ is a \textit{padding function}, meant to be more of an exploration term. Here the authors propose $c_t(i)=B\sqrt{\xi \log(t)/N_t(i)}$, with $B$ an upper bound of the rewards, and $\xi>0$ a hyperparameter.
+where $\bar{X}_t$ takes the past into account, constituting more of an exploitation term, and $c_t(i)$ is a \textit{padding function}, meant to be more of an exploration term.\\
+Here the authors propose $c_t(i)=B\sqrt{\xi \log(t)/N_t(i)}$, with $B$ an upper bound of the rewards, and $\xi>0$ a hyperparameter.
 Note that the divisions by $N_t(i)$ contribute to exploration: it an arm is chosen too often, it will not be chosen at some point due to this factor, even if it yields good rewards.
 Note that the two algorithms studied in the following are formulated in a similar way, with this idea of $\beta(t,i)\& =\bar{X}_t(i)+c_t(i)$.
