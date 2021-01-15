@@ -1,7 +1,7 @@
 The code for all the experiments described in this section are available at the following link : \url{https://github.com/MaxenceGiraud/ucb-nonstationary}.
 
-We performed three different experiments using the five algorithms described in this paper. The first one is the original UCB-1 used as a baseline for all the experiments. The second one is Disounted UCB, and the last three are the Sliding Window UCB described by Garivier et al. \cite{garivier2008upperconfidence} and the two variants we talked about in the last section.\\
-The parameters of the policies were tuned as Garivier et al. did. This means with for all algorithms $\xi = 0.5$, $\gamma = 1 - \frac{1}{4\sqrt{T}}$ and $\tau = 4 \sqrt{K \log(T)}$. As an example for $T=1000$ and $K=3$, $\tau = 18$ and $\gamma = 0.992$.\\
+We performed three different experiments using the five algorithms described in this paper. The first one is the original UCB-1 used as a baseline for all the experiments. The second one is Discounted UCB, and the last three are the Sliding Window UCB described by Garivier et al. \cite{garivier2008upperconfidence} and the two variants we talked about in the last section.\\
+The parameters of the policies were tuned as Garivier et al. did. This means for all algorithms $\xi = 0.5$, $\gamma = 1 - \frac{1}{4\sqrt{T}}$ and $\tau = 4 \sqrt{K \log(T)}$. As an example for $T=1000$ and $K=3$, $\tau = 18$ and $\gamma = 0.992$.\\
 
 The first experiment consists of a simple stationary problem with three Gaussian with means respectively 0.2, 0.3 and 0.4. The results are displayed on figure \ref{fig:statio}. As we expected the original UCB performed much better than all the other algorithms. One justification of the poor performance in the case of the main policy of interest Sliding Window UCB, can be that it has to draw each arm at least $T/\tau$ times and so even if one arm is consistently better than the others, it will draw it consequent number of times.\\
 
