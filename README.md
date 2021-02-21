@@ -17,10 +17,23 @@ import numpy as np
 import nsucb
 from bandit_env import *
 
-gaussian_arm_list = [Gaussian(x) for x in np.random.uniform(0,10,100)]
-nonstat_bandit = MAB_NS(n_arms = 5,arms_list = gaussian_arm_list,p=0.05)
+# Arms sequence
+def arm_f(t):
+    arms = [Bernoulli(0.5),Bernoulli(0.1),Bernoulli(0.4)]
+    if t> 300 and t<500 :
+        arms[1] = Bernoulli(0.9)
+    return arms 
 
-# (Algos are upcoming features)
+n=3 # nb of arms
+mab = MAB_NS(3,arm_f)
+
+# Algorithms
+ucb = nsucb.UCB(n)
+d= nsucb.DiscountedUCB(n)
+sw= nsucb.SlidingUCB(n)
+
+# Run simulations
+RunExpes([ucb,d,sw],mab,50,T,non_stationary=True,quantiles=False)
 ```
 
 To compile the report, you will need latex installed and an appropriate compiler, then you can simply :
