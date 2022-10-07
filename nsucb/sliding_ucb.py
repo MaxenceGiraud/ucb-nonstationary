@@ -105,7 +105,7 @@ class SlidingUCB_uniform_discount(SlidingUCB):
             N = np.sum(self.history_bool[-self.tau:], axis=0) +  np.sum(self.history_bool[:-self.tau], axis=0) / self.tau
 
             X = (1/N) * np.sum(self.rewards[-self.tau:], axis=0)
-            c = self.B * np.sqrt((self.xi * np.log(max(self.t,
+            c = self.B * np.sqrt((self.xi * np.log(min(self.t,
                                                        self.tau)))/N)
 
             return randmax(X+c)
